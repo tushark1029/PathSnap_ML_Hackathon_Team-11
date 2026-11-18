@@ -1,0 +1,22 @@
+# Raw / restricted dataset files (do not commit)
+Student folder/
+*.track
+*.nodes
+*.arcs
+*.route
+
+# Large derived data files
+cleaned_gps_features.csv
+
+# Folium map HTML output (6-10 MB each; generation code is what matters)
+results/maps/*.html
+# keep the smallest one as a sample output
+!results/maps/trip_00000057.html
+
+# Python / notebook / env junk
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
