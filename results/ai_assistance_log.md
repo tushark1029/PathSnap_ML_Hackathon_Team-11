@@ -19,3 +19,5 @@ One line per task: what was generated, for whom, and when.
 | 2026-11-18 | Doc cross-check + lat0 verification | Compared `feature_documentation.csv` vs both tables; empirically verified candidate-feature definitions (distance/proj_ratio/arc_length/headings/gps_* copies) and disproved the lat0=50 concern; updated `feature_selection_table.csv` with doc columns | Person 4 |
 
 *Append one row per task as work proceeds.*
+| 2026-11-18 | Evaluator frontend | `ui/` — index.html, app.js (API client + normalisers + Leaflet map/metrics), config.js (runtime API base URL), styles.css, mocks/dev_mock.js (dev-only), README.md with run instructions and provisional API contract | Person 4 |
+| 2026-11-18 | Gitignore hardening | Added evaluator_test/, Student folder/, *.track/.nodes/.arcs/.route, cleaned_gps_features.csv, results/maps/*.html rules so restricted data cannot be committed | Person 4 |

@@ -77,9 +77,9 @@ Person 4 scope: feature analysis and visualisation. All analysis uses the
 - `cleaned_gps_features.csv` (Person 3): 227,577 rows = 80 train + 10
   student_test trips; point-level features (time_diff_s, dist_m, speed,
   heading, flags, segment_id). No NaN/inf, no duplicate (trip_id, obs_index).
-- `candidate_features_sample.csv`: SAMPLE of 3 training trips only
-  (00000001, 00000003, 00000004), 44,168 rows, ~13.8 candidates/obs,
-  is_reference balance 7.2% positive. NOT the full candidate table.
+- `candidate_features_sample.csv`: SAMPLE of 3 training trips 
+(00000001, 00000003, 00000004), 44,168 rows, ~13.8 candidates/obs,
+  is_reference balance 7.2% positive. 
 - `data_preprocessing.ipynb`: Person 3's pipeline doc. Claims all data is
   "Hessen, Germany" -- CONTRADICTED by Step 0 audit (trips worldwide).
   Their candidate projection assumed fixed lat0=50 degN; metric distances
@@ -141,15 +141,6 @@ obs's candidates) -- legitimate but not candidate-specific.
 Artifacts: results/figures/step4_*.png (7 figs),
 results/feature_selection_table.csv, notebooks/step4_feature_analysis.py.
 
-## Open questions for the team
-
-- Confirm whether the per-trip `.nodes`/`.arcs` files are identical across
-  trips in overlapping regions or independently clipped (affects whether a
-  global node/arc id space exists).
-- Confirm intended handling of huge temporal gaps (00000090/00000078):
-  treat as missing data or as genuine stop?
-- The evaluator-test partition is absent — confirm it will be provided
-  separately and must stay untouched.
 
 ## References
 
@@ -163,3 +154,26 @@ See `results/ai_assistance_log.md`.
 
 ---
 *Last updated: Steps 1-4 complete + feature_documentation.csv review.*
+
+## Evaluator frontend (Person 4, Phase 2)
+
+- Stack: static HTML + vanilla JS + Leaflet (CDN). Chosen because Laptop 2
+  needs only a browser — no Node/build step, no Python env. Leaflet gives
+  toggleable layers + legend, mirroring src/visualization/folium_map.py
+  ideas (which are server-side Python and cannot run in the browser).
+- ui/config.js resolves the API base URL at runtime: ?api= query param >
+  localStorage > config default. Never hardcoded to localhost, since
+  Laptop 2 calls Laptop 1 over the LAN.
+- Provisional API contract documented in ui/README.md and ui/app.js:
+  GET /api/evaluator/trips + POST /api/evaluator/trips/{id}/predict.
+  Backend team's evaluator routes were still in progress at build time;
+  all calls are isolated in app.js normalisers so a schema change is a
+  one-file fix.
+- Ground-truth .route labels are never fetched or rendered; the UI shows
+  only GPS observations and whatever route the API returns.
+- Mock mode (?mock=1) loads ui/mocks/dev_mock.js which intercepts only
+  the two evaluator endpoints and shows a red MOCK DATA banner; without
+  the flag the module is never loaded, so real responses are the only
+  ones that can appear in the shipped UI.
+- evaluator_test/ (raw evaluator partition) and all raw dataset file
+  types added to .gitignore — restricted data must never be committed.

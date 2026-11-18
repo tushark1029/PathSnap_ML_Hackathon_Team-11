@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PathSnap — Evaluator Console</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>PathSnap Evaluator Console</h1>
+    <div id="api-status" class="status status-unknown">API: checking…</div>
+  </header>
+
+  <!-- Shown when no API base URL has been configured yet -->
+  <div id="setup-banner" class="banner banner-warn hidden">
+    <strong>API base URL not set.</strong>
+    Open this page as
+    <code>?api=http://&lt;laptop1-ip&gt;:8000</code>,
+    or enter it here:
+    <input id="api-url-input" type="text" placeholder="http://192.168.1.20:8000" />
+    <button id="api-url-save">Save</button>
+  </div>
+
+  <!-- Mock-data warning: only rendered when ?mock=1 is used -->
+  <div id="mock-banner" class="banner banner-mock hidden">
+    MOCK DATA — development only. Not real API responses.
+  </div>
+
+  <main>
+    <aside id="trip-panel">
+      <h2>Evaluator trips</h2>
+      <p class="hint">Ten reserved trips served by the API. Labels stay server-side.</p>
+      <select id="trip-select"><option value="">— loading —</option></select>
+      <button id="predict-btn" disabled>Run prediction</button>
+      <div id="trip-meta" class="meta"></div>
+      <div id="error-box" class="error hidden"></div>
+    </aside>
+
+    <section id="map-panel">
+      <div id="map"></div>
+      <div id="map-legend" class="legend hidden">
+        <span><i class="swatch swatch-gps"></i>GPS observations</span>
+        <span><i class="swatch swatch-pred"></i>Predicted route</span>
+      </div>
+    </section>
+
+    <aside id="metrics-panel">
+      <h2>Evaluation results</h2>
+      <div id="metrics-empty" class="hint">Select a trip and run prediction.</div>
+      <div id="metrics" class="hidden">
+        <div id="metric-cards"></div>
+        <h3>Timings</h3>
+        <dl id="timings"></dl>
+      </div>
+      <div id="loading" class="hidden"><div class="spinner"></div>Predicting…</div>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
