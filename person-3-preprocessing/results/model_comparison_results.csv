@@ -1,0 +1,6 @@
+Model,Train Time (s),Inference Time (s),Accuracy,Precision,Recall,F1-Score,ROC-AUC,Log Loss,Top-1 Accuracy
+Logistic Regression,0.04,0.001,0.7902,0.4645,0.9704,0.6283,0.9365,0.5924,0.9009
+Decision Tree,0.168,0.001,0.9451,0.7803,0.9736,0.8663,0.9828,0.2665,0.9213
+Random Forest,0.478,0.037,0.9561,0.8261,0.9624,0.8891,0.9913,0.1372,0.9297
+K-Nearest Neighbors,0.018,0.599,0.9347,0.8007,0.8558,0.8273,0.9674,0.4808,0.8769
+HistGradientBoosting,0.88,0.02,0.9526,0.8217,0.9461,0.8795,0.9882,0.1284,0.9213
