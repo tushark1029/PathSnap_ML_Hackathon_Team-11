@@ -177,3 +177,26 @@ See `results/ai_assistance_log.md`.
   ones that can appear in the shipped UI.
 - evaluator_test/ (raw evaluator partition) and all raw dataset file
   types added to .gitignore — restricted data must never be committed.
+
+## Evaluator API endpoints (Person 4, interim backend)
+
+- Implemented GET /api/evaluator/trips and POST /api/evaluator/trips/{id}/predict
+  in backend/app/api/evaluator_routes.py + backend/app/services/matching_service.py,
+  because the backend teammate's ML integration was still pending and the demo
+  needed working endpoints. Backend teammate should review/replace.
+- Pipeline: port of train_advanced_features_rf.py candidate generation (17
+  ADVANCED_FEATURE_COLS, radius 50m, spatial grid) MINUS ground-truth alignment;
+  champion blend 0.6*RF + 0.4*HGB predict_proba; Viterbi decode with the same
+  transition model as the training eval but with backpointers (O(T*C) memory
+  instead of copying path lists — needed for 6.8k-obs trips).
+- .route labels are read ONLY server-side for hmm_accuracy/classifier_accuracy
+  metrics; never returned to the client. Route polyline = predicted arc
+  sequence walked through node endpoints.
+- EVALUATOR_DIR configurable via PATHSNAP_EVALUATOR_DIR env var; defaults to
+  <repo>/evaluator_test. evaluator_test/ is gitignored — data stays off git.
+- NOTE: local sklearn is 1.7.0 but models were trained with 1.9.1
+  (InconsistentVersionWarning; predictions still produced sane metrics).
+  requirements.txt pins 1.9.1 — use a matching env on Laptop 1.
+- Verified: GET /api/evaluator/trips returns all 10 trips; POST predict on
+  00000023 -> hmm_accuracy 0.928, continuity 0.993, ~6.7s; on 00000067 ->
+  0.729 accuracy, ~1.2s (warm model cache).

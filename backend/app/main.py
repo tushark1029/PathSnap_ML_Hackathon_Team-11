@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.trip_routes import router as trip_router
+from app.api.evaluator_routes import router as evaluator_router
 
 
 app = FastAPI(
@@ -26,6 +27,7 @@ app.add_middleware(
 
 # Register API routes
 app.include_router(trip_router)
+app.include_router(evaluator_router)
 
 
 @app.get("/")

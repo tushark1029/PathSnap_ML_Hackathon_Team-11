@@ -21,3 +21,4 @@ One line per task: what was generated, for whom, and when.
 *Append one row per task as work proceeds.*
 | 2026-11-18 | Evaluator frontend | `ui/` — index.html, app.js (API client + normalisers + Leaflet map/metrics), config.js (runtime API base URL), styles.css, mocks/dev_mock.js (dev-only), README.md with run instructions and provisional API contract | Person 4 |
 | 2026-11-18 | Gitignore hardening | Added evaluator_test/, Student folder/, *.track/.nodes/.arcs/.route, cleaned_gps_features.csv, results/maps/*.html rules so restricted data cannot be committed | Person 4 |
+| 2026-11-18 | Evaluator API endpoints | `backend/app/api/evaluator_routes.py` + `backend/app/services/matching_service.py` (candidate generation port, RF+HGB blend, backpointer Viterbi, server-side accuracy metrics) | Person 4 |

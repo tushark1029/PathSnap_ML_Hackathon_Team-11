@@ -30,11 +30,12 @@ typed once per browser. Alternatives:
 `localhost` is never assumed — if no URL is configured the UI shows a
 setup banner instead of guessing.
 
-## API contract (PROVISIONAL)
+## API contract (IMPLEMENTED)
 
-The backend team's evaluator routes are still in progress. The UI is
-coded against this proposed contract; all calls live in `ui/app.js`
-(API CONTRACT comment + `norm*()` normalisers tolerate shape variants).
+The evaluator endpoints now exist in `backend/app/api/evaluator_routes.py`
+(service: `backend/app/services/matching_service.py`). The UI is coded
+against this contract; all calls live in `ui/app.js` (API CONTRACT comment
++ `norm*()` normalisers tolerate shape variants).
 
 ```
 GET  /api/evaluator/trips

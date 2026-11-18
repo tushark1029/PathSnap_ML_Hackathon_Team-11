@@ -85,7 +85,7 @@ async function apiGet(path) {
 
 async function apiPost(path, body) {
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 30000); // predictions can be slow
+  const timer = setTimeout(() => ctrl.abort(), 300000); // large trips can take minutes
   try {
     const res = await fetch(API_BASE + path, {
       method: "POST",
