@@ -1,5 +1,23 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Uploaded files
+backend/uploads/
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.log
 .DS_Store
-.venv/
+
+# Environment variables
+.env
