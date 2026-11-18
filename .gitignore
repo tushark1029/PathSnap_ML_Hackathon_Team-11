@@ -7,6 +7,7 @@ env/
 __pycache__/
 *.py[cod]
 *$py.class
+.ipynb_checkpoints/
 
 # Uploaded files
 backend/uploads/
@@ -21,3 +22,30 @@ backend/uploads/
 
 # Environment variables
 .env
+
+# --- PathSnap data rules (restricted data must never be committed) ---
+# Raw dataset partitions
+Student folder/
+evaluator_test/
+*.track
+*.nodes
+*.arcs
+*.route
+
+# Large derived data
+cleaned_gps_features.csv
+
+# Folium map HTML output (6-10 MB each; keep generation code, not outputs)
+results/maps/*.html
+!results/maps/trip_00000057.html
+
+# --- PathSnap data rules (restricted data must never be committed) ---
+Student folder/
+evaluator_test/
+*.track
+*.nodes
+*.arcs
+*.route
+cleaned_gps_features.csv
+results/maps/*.html
+!results/maps/trip_00000057.html
